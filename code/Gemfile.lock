@@ -1,0 +1,27 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    coderay (1.1.0)
+    dalli (2.7.2)
+    descriptive_statistics (2.5.1)
+    method_source (0.8.2)
+    mysql2 (0.3.17)
+    pg (0.18.1)
+    pry (0.10.1)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
+    redis (3.2.0)
+    slop (3.6.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  dalli
+  descriptive_statistics
+  mysql2
+  pg
+  pry
+  redis
+  slop

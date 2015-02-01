@@ -1,0 +1,11 @@
+# A sample Gemfile
+source "https://rubygems.org"
+
+gem "mysql2"
+gem "dalli"
+gem "redis"
+gem "pg"
+
+gem "slop"
+gem "pry"
+gem "descriptive_statistics"
