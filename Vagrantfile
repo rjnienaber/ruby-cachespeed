@@ -10,7 +10,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provider "virtualbox" do |v|
     v.memory = 4096
-    v.cpus = 2
+    v.cpus = 4 
     v.customize ["modifyvm", :id, "--cpuexecutioncap", "90"]
   end
 
@@ -18,6 +18,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision "shell", path: "scripts/apt.postgresql.org.sh"
 
   config.vm.provision "shell", inline: %Q{
+    gpg --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3
     sudo add-apt-repository -y ppa:rwky/redis
 
     sudo apt-get -y update
@@ -28,7 +29,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     echo "mysql-server-5.6 mysql-server/root_password_again password root" | sudo debconf-set-selections
 
     #install mysql, postgresql, redis
-    sudo apt-get -y install python-software-properties postgresql-9.4 postgresql-contrib-9.4 mysql-server-5.6 redis-server memcached
+    sudo apt-get -y install python-software-properties libpq-dev postgresql-9.4 postgresql-contrib-9.4 libmysqlclient-dev mysql-server-5.6 redis-server memcached
 
     #redis config
     sudo sh -c "echo appendfsync everysec >> /etc/redis/conf.d/local.conf"
@@ -50,9 +51,19 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     #memcache
     sudo sed -i "s/-l.*/\-l\ 0.0.0.0/" /etc/memcached.conf
     sudo /etc/init.d/memcached restart
-  }
 
-  # Create a forwarded port mapping which allows access to a specific port
+    #rvm
+      }
+
+    config.vm.provision "shell", privileged: false, path: "scripts/rvm.sh"
+    config.vm.provision "shell", privileged: false, inline: %Q{
+      source /home/vagrant/.rvm/scripts/rvm
+      rvm install ruby-2.2.0
+      cd /vagrant/code/
+      bundle
+    }
+
+    # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
   config.vm.network "forwarded_port", guest: 3306, host: 33306 #mysql

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-rm results.csv
+rm -f results.csv
 for f in memcache redis mysql postgresql; do echo; ruby benchmark.rb -b $f -t 1 -d 600; done
 for f in memcache redis mysql postgresql; do echo; ruby benchmark.rb -b $f -t 2 -d 600; done
 for f in memcache redis mysql postgresql; do echo; ruby benchmark.rb -b $f -t 3 -d 600; done

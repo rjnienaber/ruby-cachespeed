@@ -2,7 +2,7 @@ class MysqlBenchmark < CacheBenchmark
   attr_reader :client
   def initialize(status, counter, logger)
     super
-    @client = Mysql2::Client.new(host: "127.0.0.1", username: "root", password: "root", port: 33306, flags: Mysql2::Client::MULTI_STATEMENTS)
+    @client = Mysql2::Client.new(host: "127.0.0.1", username: "root", password: "root", port: 3306, flags: Mysql2::Client::MULTI_STATEMENTS)
   end
 
   def reset

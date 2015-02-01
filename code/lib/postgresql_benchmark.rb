@@ -2,7 +2,7 @@ class PostgresqlBenchmark < CacheBenchmark
   attr_reader :client
   def initialize(status, counter, logger)
     super
-    @client = PG.connect(dbname: 'benchmark', host: '127.0.0.1', port: 35432, user: 'benchmark', password: 'benchmark')
+    @client = PG.connect(dbname: 'benchmark', host: '127.0.0.1', port: 5432, user: 'benchmark', password: 'benchmark')
   end
 
   def reset
