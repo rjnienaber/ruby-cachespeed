@@ -27,6 +27,7 @@ end
 
 def run_benchmark(benchmark, options)
   LOGGER.info "Running benchmark: #{benchmark.type.name.gsub('Benchmark', '')}, (#{options[:duration]}s, #{options[:threads]} threads)"
+  benchmark.reset
   start_time = Time.now
   benchmark.start
   sleep options[:duration]
@@ -60,4 +61,3 @@ benchmark = create_benchmark(options)
 results = run_benchmark(benchmark, options)
 results.save(options[:output_file])
 output_results(options, benchmark, results)
-
