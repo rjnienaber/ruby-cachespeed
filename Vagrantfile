@@ -10,8 +10,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provider "virtualbox" do |v|
     v.memory = 4096
-    v.cpus = 4 
-    v.customize ["modifyvm", :id, "--cpuexecutioncap", "90"]
+    v.cpus = 4
+    v.customize ["modifyvm", :id, "--cpuexecutioncap", "100"]
   end
 
   config.vm.provision "shell", inline: "sudo apt-get -y install ca-certificates"
@@ -51,23 +51,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     #memcache
     sudo sed -i "s/-l.*/\-l\ 0.0.0.0/" /etc/memcached.conf
     sudo /etc/init.d/memcached restart
+  }
 
-    #rvm
-      }
-
-    config.vm.provision "shell", privileged: false, path: "scripts/rvm.sh"
-    config.vm.provision "shell", privileged: false, inline: %Q{
-      source /home/vagrant/.rvm/scripts/rvm
-      rvm install ruby-2.2.0
-      cd /vagrant/code/
-      bundle
-    }
-
-    # Create a forwarded port mapping which allows access to a specific port
-  # within the machine from a port on the host machine. In the example below,
-  # accessing "localhost:8080" will access port 80 on the guest machine.
-  config.vm.network "forwarded_port", guest: 3306, host: 33306 #mysql
-  config.vm.network "forwarded_port", guest: 6379, host: 36379 #redis
-  config.vm.network "forwarded_port", guest: 11211, host: 31211 #memcache
-  config.vm.network "forwarded_port", guest: 5432, host: 35432 #postgresql
+  config.vm.provision "shell", privileged: false, path: "scripts/rvm.sh"
+  config.vm.provision "shell", privileged: false, inline: %Q{
+    source /home/vagrant/.rvm/scripts/rvm
+    rvm install ruby-2.2.0
+    cd /vagrant/code/
+    bundle
+  }
 end
