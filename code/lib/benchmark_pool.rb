@@ -10,8 +10,11 @@ class BenchmarkPool
     pool.each(&:warmup)
   end
 
-  def start
+  def reset
     pool.first.reset
+  end
+
+  def start
     pool.each(&:start)
   end
 
