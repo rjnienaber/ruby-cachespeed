@@ -46,7 +46,7 @@ def output_results(options, benchmark, results)
   LOGGER.info "Errors: #{results.errors.length}"
   LOGGER.info "Valid?: #{results.valid?}"
   LOGGER.info "Missing: #{results.missing[0..9]}#{results.missing.length > 10 ? '...' : ''} (#{results.missing.length})" unless results.valid?
-  LOGGER.info "Duration: #{options[:duration]}"
+  LOGGER.info "Duration: #{results.duration.round(2)}"
   LOGGER.info "Requests/sec: #{results.requests_per_sec.round(2)}"
   LOGGER.info "Median: #{results.median.round(2)} (ms)"
   LOGGER.info "95%: #{results.ninety_five_percentile.round(2)} (ms)"

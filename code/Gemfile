@@ -5,6 +5,7 @@ gem "mysql2"
 gem "dalli"
 gem "redis"
 gem "pg"
+gem "activerecord", require: 'active_record'
 
 gem "slop"
 gem "pry"

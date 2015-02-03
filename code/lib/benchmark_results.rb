@@ -41,7 +41,7 @@ class BenchmarkResults
   end
 
   def requests_per_sec
-    response_times_in_ms.length / duration.to_f
+    response_count / duration.to_f
   end
 
   def response_times_in_ms

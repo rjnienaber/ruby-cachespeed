@@ -36,9 +36,10 @@ class CacheBenchmark
         end
         logger.debug "Thread #{counter} stopped"
       rescue => e
-        puts "Thread died with error: #{e}"
+        logger.debug "Thread-#{counter} died with error: #{e} - #{e.backtrace.join("\n")}"
+      ensure
+        self.stopped = true  
       end 
-      self.stopped = true
     end
   end
 
@@ -71,7 +72,8 @@ class CacheBenchmark
       responses << result
       response_times << (end_time - start_time)
     end
-  rescue => e
+  rescue => e    
     errors << e
+    raise
   end
 end
