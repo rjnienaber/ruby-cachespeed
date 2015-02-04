@@ -20,6 +20,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision "shell", inline: %Q{
     gpg --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3
     sudo add-apt-repository -y ppa:rwky/redis
+    sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+    echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
 
     sudo apt-get -y update
     sudo apt-get -y upgrade
@@ -29,7 +31,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     echo "mysql-server-5.6 mysql-server/root_password_again password root" | sudo debconf-set-selections
 
     #install mysql, postgresql, redis
-    sudo apt-get -y install python-software-properties libpq-dev postgresql-9.4 postgresql-contrib-9.4 libmysqlclient-dev mysql-server-5.6 redis-server memcached
+    sudo apt-get -y install python-software-properties libpq-dev postgresql-9.4 postgresql-contrib-9.4 libmysqlclient-dev mysql-server-5.6 redis-server memcached mongodb-org
 
     #redis config
     sudo sh -c "echo appendfsync everysec >> /etc/redis/conf.d/local.conf"

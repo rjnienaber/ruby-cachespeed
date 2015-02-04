@@ -51,6 +51,13 @@ def output_results(options, benchmark, results)
   LOGGER.info "Median: #{results.median.round(2)} (ms)"
   LOGGER.info "95%: #{results.ninety_five_percentile.round(2)} (ms)"
   LOGGER.info "99%: #{results.ninety_nine_percentile.round(2)} (ms)"
+  if results.errors.any?
+    LOGGER.info "ALL ERRORS:"
+    results.errors.each do |error|
+      LOGGER.info error
+      LOGGER.info '-' * 20
+    end
+  end
 end
 
 options = parse_options

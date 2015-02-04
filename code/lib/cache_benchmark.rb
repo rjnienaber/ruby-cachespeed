@@ -68,10 +68,9 @@ class CacheBenchmark
     start_time = Time.now          
     result = execute
     end_time = Time.now
-    if status.running
-      responses << result
-      response_times << (end_time - start_time)
-    end
+
+    responses << result 
+    response_times << (end_time - start_time)
   rescue => e    
     errors << e
     raise
