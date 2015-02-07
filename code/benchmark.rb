@@ -13,7 +13,7 @@ def parse_options
 
     on '-b=', '--benchmark=', 'Benchmark to perform (mysql, memcache, redis, postgres)'
     on '-t=', '--threads=', 'Threads to use (default 10)', default: 10, argument: :optional, as: Integer
-    on '-d=', '--duration=', 'Duration in seconds to run benchmark (default 10)', default: 80, argument: :optional, as: Integer
+    on '-d=', '--duration=', 'Duration in seconds to run benchmark (default 10)', default: 10, argument: :optional, as: Integer
     on '-o=', '--output_file=', 'Output to file', default: 'results.csv', argument: :optional
     on '-l=', '--log_level=', 'Logging level', default: 'info', argument: :optional
   end
