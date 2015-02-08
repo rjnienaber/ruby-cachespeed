@@ -7,7 +7,11 @@ class BenchmarkPool
     @status = Struct.new(:running).new(true)  
 
     @pool = (1..@pool_size).map { |i| type.new(@status, i, logger)}
-    pool.each(&:warmup)
+  end
+
+  def warmup
+    t = pool.map { |b| Thread.new { b.warmup }}
+    t.each(&:join)
   end
 
   def reset

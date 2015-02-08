@@ -3,7 +3,7 @@ class MemcacheBenchmark < CacheBenchmark
   
   def initialize(status, counter, logger)
     super
-    @client = Dalli::Client.new('127.0.0.1:11211')
+    @client = Dalli::Client.new('127.0.0.1:11210')
     Dalli.logger = logger
   end
 

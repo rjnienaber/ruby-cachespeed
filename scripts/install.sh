@@ -34,6 +34,7 @@ sudo service postgresql restart
 
 #memcache
 sudo sed -i "s/-l.*/\-l\ 0.0.0.0/" /etc/memcached.conf
+sudo sed -i "s/-p.*/\-p\ 11210/" /etc/memcached.conf
 sudo /etc/init.d/memcached restart
 
 #infinispan

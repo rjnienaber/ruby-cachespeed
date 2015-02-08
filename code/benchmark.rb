@@ -28,6 +28,7 @@ end
 
 def run_benchmark(benchmark, options)
   LOGGER.info "Running benchmark: #{benchmark.type.name.gsub('Benchmark', '')}, (#{options[:duration]}s, #{options[:threads]} threads)"
+  benchmark.warmup
   benchmark.reset
   start_time = Time.now
   benchmark.start
