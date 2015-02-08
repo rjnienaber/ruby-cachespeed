@@ -1,8 +1,8 @@
 #!/bin/sh
 
 #check all benchmarks work
-for f in memcache redis mongo mysql mysql_innodb mysql_active_record postgresql; do echo; ruby benchmark.rb -b $f -t 10 -d 1 -o warmup.csv; done
-rvm jruby-1.7.19@cache_speed do ruby benchmark.rb -b infinispan -t $f -d 600 -o warmup.csv
+for f in memcache redis mongo mysql mysql_innodb mysql_active_record postgresql; do echo; rvm ruby-2.2.0@cache_speed do ruby benchmark.rb -b $f -t 10 -d 1 -o warmup.csv; done
+rvm jruby-1.7.19@cache_speed do ruby benchmark.rb -b infinispan -t 1 -d 600 -o warmup.csv
 rm -f warmup.csv
 
 OUTPUT_FILE=results_all.csv

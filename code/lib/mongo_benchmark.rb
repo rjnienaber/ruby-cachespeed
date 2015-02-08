@@ -10,6 +10,6 @@ class MongoBenchmark < CacheBenchmark
   end
 
   def execute
-    client['benchmark']['cache'].find_and_modify(update: { '$inc': { counter: 1 } }, upsert: true, :new => true)['counter']
+    client['benchmark']['cache'].find_and_modify(update: { '$inc' => { counter: 1 } }, upsert: true, :new => true)['counter']
   end
 end 

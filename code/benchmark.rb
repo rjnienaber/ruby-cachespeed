@@ -23,7 +23,7 @@ def create_benchmark(options)
   benchmark = options[:benchmark].downcase
   benchmark_name = benchmark.split('_').map { |s| s[0].upcase + s[1..-1] }.join
   type = Object::const_get("#{benchmark_name}Benchmark")
-  BenchmarkPool.new(type, LOGGER, pool_size: options[:threads])
+  BenchmarkPool.new(type, LOGGER, options[:threads])
 end
 
 def run_benchmark(benchmark, options)
@@ -63,9 +63,11 @@ end
 options = parse_options
 
 LOGGER = Logger.new(STDOUT)
-LOGGER.level = Object::const_get("Logger::#{options[:log_level].upcase}")
+LOGGER.level = Logger::const_get(options[:log_level].upcase)
 
 benchmark = create_benchmark(options)
 results = run_benchmark(benchmark, options)
 results.save(options[:output_file])
 output_results(options, benchmark, results)
+
+exit

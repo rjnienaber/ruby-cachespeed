@@ -41,6 +41,7 @@ GEM
       thread_safe (~> 0.1)
 
 PLATFORMS
+  java
   ruby
 
 DEPENDENCIES

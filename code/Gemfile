@@ -1,14 +1,14 @@
 # A sample Gemfile
 source "https://rubygems.org"
 
-gem "mysql2"
-gem "dalli"
-gem "redis"
-gem "pg"
-gem "activerecord", require: 'active_record'
-gem "mongo"
-gem "bson_ext"
+gem "mysql2", :platforms => :ruby
+gem "dalli", :platforms => :ruby
+gem "redis", :platforms => :ruby
+gem "pg", :platforms => :ruby
+gem "activerecord", require: 'active_record', :platforms => :ruby
+gem "mongo", :platforms => :ruby
+gem "bson_ext", :platforms => :ruby
 
 gem "slop"
-gem "pry"
+gem "pry", :platforms => :ruby
 gem "descriptive_statistics"

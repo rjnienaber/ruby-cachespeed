@@ -1,12 +1,12 @@
 class BenchmarkPool
   attr_reader :type, :pool_size, :status, :pool, :mutex
 
-  def initialize(type, logger, pool_size: 10)
+  def initialize(type, logger, pool_size=10)
     @type = type
-    @pool_size = pool_size
+    @pool_size = pool_size || 10
     @status = Struct.new(:running).new(true)  
 
-    @pool = (1..pool_size).map { |i| type.new(@status, i, logger)}
+    @pool = (1..@pool_size).map { |i| type.new(@status, i, logger)}
     pool.each(&:warmup)
   end
 
